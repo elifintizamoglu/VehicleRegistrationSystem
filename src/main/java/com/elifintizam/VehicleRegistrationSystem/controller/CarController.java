@@ -7,16 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elifintizam.VehicleRegistrationSystem.car.Car;
+import com.elifintizam.VehicleRegistrationSystem.service.CarService;
 
 @RestController
 @RequestMapping(path = "api/v1/car")
 public class CarController {
 
+    private CarService carService;
+
+    public CarController(CarService carService){
+        this.carService = carService;
+    }
+
     @GetMapping
     public List<Car> getCars(){
-        return List.of(
-            new Car(1L, "First Car", "Audi", "A2", 2015, "31 AA 123")
-        );
+        return carService.getCars();
     }
     
 }
