@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.elifintizam.VehicleRegistrationSystem.model.Car;
 
 @Repository
-public interface CarRepository extends JpaRepository<Car, Long>{
+public interface CarRepository extends JpaRepository<Car, Long>{ 
     
 }

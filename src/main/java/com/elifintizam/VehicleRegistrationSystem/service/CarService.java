@@ -1,6 +1,7 @@
 package com.elifintizam.VehicleRegistrationSystem.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class CarService {
 
     public List<Car> getCars() {
         return carRepository.findAll();
-                //new Car(1L, "First Car", "Audi", "A2", 2015, "31 AA 123"));
+    }
+
+    public void addCar(Car car) {
+        carRepository.save(car);
     }
 }
