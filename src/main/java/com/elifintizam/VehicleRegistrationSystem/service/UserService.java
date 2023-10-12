@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.elifintizam.VehicleRegistrationSystem.model.User;
 import com.elifintizam.VehicleRegistrationSystem.repository.UserRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UserService {
 
@@ -38,5 +40,14 @@ public class UserService {
 			throw new IllegalStateException("User with id " + userId + " does not exists.");
 		}
 		userRepository.deleteById(userId);
+	}
+
+	@Transactional
+	public void updateUserPassword(Long userId, String oldPassword, String newPassword) {
+		User user = userRepository.findById(userId)
+				.orElseThrow(() -> new IllegalStateException("User with id " + userId + " does not exists."));
+		if (oldPassword.equals(user.getPassword()) && !newPassword.equals(oldPassword)) {
+			user.setPassword(newPassword);
+		}
 	}
 }
