@@ -1,7 +1,6 @@
 package com.elifintizam.VehicleRegistrationSystem.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,7 @@ public class CarService {
     private final CarRepository carRepository;
 
     @Autowired
-    public CarService(CarRepository carRepository){
+    public CarService(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
 
@@ -25,5 +24,13 @@ public class CarService {
 
     public void addCar(Car car) {
         carRepository.save(car);
+    }
+
+    public void deleteCar(Long carId) {
+        boolean exists = carRepository.existsById(carId);
+        if (!exists) {
+            throw new IllegalStateException("Car with id " + carId + " does not exists.");
+        }
+        carRepository.deleteById(carId);
     }
 }
