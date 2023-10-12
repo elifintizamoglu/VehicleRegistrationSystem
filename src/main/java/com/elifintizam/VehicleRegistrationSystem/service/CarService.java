@@ -26,6 +26,10 @@ public class CarService {
     }
 
     public void addCar(Car car) {
+        Optional<Car> carOptional = carRepository.findCarByNumberPlate(car.getNumberPlate());
+        if (carOptional.isPresent()) {
+            throw new IllegalStateException("This number plate is already registered.");
+        }
         carRepository.save(car);
     }
 
@@ -65,8 +69,14 @@ public class CarService {
             } else {
                 car.setNumberPlate(numberPlate);
             }
-
         }
+    }
 
+    public List<Car> getCarsByModelOrBrand(String searchWord) {
+        List<Car> cars = carRepository.findCarsByModelOrBrand(searchWord);
+        if (cars.isEmpty()) {
+            throw new IllegalStateException("There are no such brand or model");
+        }
+        return cars;
     }
 }

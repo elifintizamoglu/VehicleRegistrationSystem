@@ -27,7 +27,7 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/allCars")
     public List<Car> getCars() {
         return carService.getCars();
     }
@@ -50,5 +50,10 @@ public class CarController {
             @RequestParam(required = false) Integer year,
             @RequestParam(required = false) String numberPlate) {
         carService.updateCar(carId, carName, brand, model, year, numberPlate);
+    }
+
+    @GetMapping(path = "/getByModelOrBrand/{searchWord}")
+    public List<Car> getCarsbyModelOrBrand(@PathVariable("searchWord") String searchWord) {
+        return carService.getCarsByModelOrBrand(searchWord);
     }
 }
