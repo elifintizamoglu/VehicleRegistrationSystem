@@ -12,19 +12,21 @@ import com.elifintizam.VehicleRegistrationSystem.repository.UserRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class UserService {
+public class UserServiceImpl implements IUserService {
 
 	private final UserRepository userRepository;
 
 	@Autowired
-	public UserService(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 
+	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
-
+	
+	@Override
 	public void addUser(User user) {
 		Optional<User> userOptional = userRepository.findUserByUserName(user.getUserName());
 		if (userOptional.isPresent()) {
@@ -34,6 +36,7 @@ public class UserService {
 		}
 	}
 
+	@Override
 	public void deleteUser(Long userId) {
 		boolean exists = userRepository.existsById(userId);
 		if (!exists) {
@@ -42,6 +45,7 @@ public class UserService {
 		userRepository.deleteById(userId);
 	}
 
+	@Override
 	@Transactional
 	public void updateUserPassword(Long userId, String oldPassword, String newPassword) {
 		User user = userRepository.findById(userId)

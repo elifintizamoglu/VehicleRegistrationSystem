@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elifintizam.VehicleRegistrationSystem.model.User;
-import com.elifintizam.VehicleRegistrationSystem.service.UserService;
+import com.elifintizam.VehicleRegistrationSystem.service.UserServiceImpl;
 
 @RestController
 @RequestMapping(path = "api/v1/user")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 

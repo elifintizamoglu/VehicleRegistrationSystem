@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.elifintizam.VehicleRegistrationSystem.model.Car;
-import com.elifintizam.VehicleRegistrationSystem.service.CarService;
+import com.elifintizam.VehicleRegistrationSystem.service.CarServiceImpl;
 
 @RestController
 @RequestMapping(path = "api/v1/car")
 public class CarController {
 
-    private final CarService carService;
+    private final CarServiceImpl carService;
 
     @Autowired
-    public CarController(CarService carService) {
+    public CarController(CarServiceImpl carService) {
         this.carService = carService;
     }
 

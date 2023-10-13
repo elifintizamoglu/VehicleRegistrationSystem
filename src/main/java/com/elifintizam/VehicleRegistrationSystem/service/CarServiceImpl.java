@@ -12,12 +12,12 @@ import com.elifintizam.VehicleRegistrationSystem.repository.CarRepository;
 import jakarta.transaction.Transactional;
 
 @Service
-public class CarService {
+public class CarServiceImpl implements ICarService{
 
     private final CarRepository carRepository;
 
     @Autowired
-    public CarService(CarRepository carRepository) {
+    public CarServiceImpl(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
 
