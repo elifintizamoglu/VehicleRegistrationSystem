@@ -21,10 +21,12 @@ public class CarServiceImpl implements ICarService{
         this.carRepository = carRepository;
     }
 
+    @Override
     public List<Car> getCars() {
         return carRepository.findAll();
     }
 
+    @Override
     public void addCar(Car car) {
         Optional<Car> carOptional = carRepository.findCarByNumberPlate(car.getNumberPlate());
         if (carOptional.isPresent()) {
@@ -33,6 +35,7 @@ public class CarServiceImpl implements ICarService{
         carRepository.save(car);
     }
 
+    @Override
     public void deleteCar(Long carId) {
         boolean exists = carRepository.existsById(carId);
         if (!exists) {
@@ -41,6 +44,7 @@ public class CarServiceImpl implements ICarService{
         carRepository.deleteById(carId);
     }
 
+    @Override
     @Transactional
     public void updateCar(Long carId, String carName, String brand, String model, Integer year, String numberPlate) {
         Car car = carRepository.findById(carId)
@@ -72,6 +76,7 @@ public class CarServiceImpl implements ICarService{
         }
     }
 
+    @Override
     public List<Car> getCarsByModelOrBrand(String searchWord) {
         List<Car> cars = carRepository.findCarsByModelOrBrand(searchWord);
         if (cars.isEmpty()) {
