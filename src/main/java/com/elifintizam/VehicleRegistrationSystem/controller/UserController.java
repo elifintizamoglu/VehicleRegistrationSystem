@@ -32,6 +32,11 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @GetMapping(path = "/getById/{userId}")
+    public User getUserById(@PathVariable("userId") Long userId) {
+        return userService.getUserById(userId);
+    }
+
     @PostMapping(path = "/add")
     public void addUser(@RequestBody User user) {
         userService.addUser(user);

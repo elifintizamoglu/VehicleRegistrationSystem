@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.elifintizam.VehicleRegistrationSystem.exception.UserNotFoundException;
 import com.elifintizam.VehicleRegistrationSystem.model.User;
 import com.elifintizam.VehicleRegistrationSystem.repository.UserRepository;
 
@@ -24,6 +25,15 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll();
+	}
+
+	@Override
+	public User getUserById(Long userId) {
+		Optional<User> userOptional = userRepository.findById(userId);
+		if(!userOptional.isPresent()){
+			throw new UserNotFoundException(userId);
+		}
+		return userOptional.get();
 	}
 	
 	@Override
@@ -54,4 +64,6 @@ public class UserServiceImpl implements IUserService {
 			user.setPassword(newPassword);
 		}
 	}
+
+	
 }
