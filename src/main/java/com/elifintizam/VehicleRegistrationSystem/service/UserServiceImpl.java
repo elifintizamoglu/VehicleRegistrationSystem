@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.elifintizam.VehicleRegistrationSystem.exception.UserAlreadyExistsException;
 import com.elifintizam.VehicleRegistrationSystem.exception.UserNotFoundException;
 import com.elifintizam.VehicleRegistrationSystem.model.User;
 import com.elifintizam.VehicleRegistrationSystem.repository.UserRepository;
@@ -40,7 +41,7 @@ public class UserServiceImpl implements IUserService {
 	public void addUser(User user) {
 		Optional<User> userOptional = userRepository.findUserByUserName(user.getUserName());
 		if (userOptional.isPresent()) {
-			throw new IllegalStateException("Username is taken.");
+			throw new UserAlreadyExistsException(user.getUserName());
 		} else {
 			userRepository.save(user);
 		}
