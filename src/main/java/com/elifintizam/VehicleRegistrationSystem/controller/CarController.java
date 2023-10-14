@@ -17,7 +17,7 @@ import com.elifintizam.VehicleRegistrationSystem.model.Car;
 import com.elifintizam.VehicleRegistrationSystem.service.CarServiceImpl;
 
 @RestController
-@RequestMapping(path = "api/v1/car")
+@RequestMapping(path = "car")
 public class CarController {
 
     private final CarServiceImpl carService;
@@ -27,22 +27,22 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping(path = "/allCars")
+    @GetMapping(path = "/all")
     public List<Car> getCars() {
         return carService.getCars();
     }
 
-    @PostMapping
+    @PostMapping(path = "/add")
     public void addCar(@RequestBody Car car) {
         carService.addCar(car);
     }
 
-    @DeleteMapping(path = "{carId}")
+    @DeleteMapping(path = "/delete/{carId}")
     public void deleteCar(@PathVariable("carId") Long carId) {
         carService.deleteCar(carId);
     }
 
-    @PutMapping(path = "{carId}")
+    @PutMapping(path = "/update/{carId}")
     public void updateCar(@PathVariable("carId") Long carId,
             @RequestParam(required = false) String carName,
             @RequestParam(required = false) String brand,
@@ -53,7 +53,7 @@ public class CarController {
     }
 
     @GetMapping(path = "/getByModelOrBrand/{searchWord}")
-    public List<Car> getCarsbyModelOrBrand(@PathVariable("searchWord") String searchWord) {
+    public List<Car> getCarsByModelOrBrand(@PathVariable("searchWord") String searchWord) {
         return carService.getCarsByModelOrBrand(searchWord);
     }
 }

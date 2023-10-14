@@ -17,7 +17,7 @@ import com.elifintizam.VehicleRegistrationSystem.model.User;
 import com.elifintizam.VehicleRegistrationSystem.service.UserServiceImpl;
 
 @RestController
-@RequestMapping(path = "api/v1/user")
+@RequestMapping(path = "user")
 public class UserController {
 
     private final UserServiceImpl userService;
@@ -27,22 +27,22 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/all")
     public List<User> getUsers() {
         return userService.getUsers();
     }
 
-    @PostMapping
+    @PostMapping(path = "/add")
     public void addUser(@RequestBody User user) {
         userService.addUser(user);
     }
 
-    @DeleteMapping(path = "{userId}")
+    @DeleteMapping(path = "/delete/{userId}")
     public void deleteUser(@PathVariable("userId") Long userId) {
         userService.deleteUser(userId);
     }
 
-    @PutMapping(path = "{userId}")
+    @PutMapping(path = "/update/{userId}")
     public void updateUserPassword(@PathVariable("userId") Long userId,
             @RequestParam(required = true) String oldPassword,
             @RequestParam(required = true) String newPassword) {
