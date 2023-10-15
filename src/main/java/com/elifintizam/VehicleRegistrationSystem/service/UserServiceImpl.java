@@ -31,12 +31,21 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User getUserById(Long userId) {
 		Optional<User> userOptional = userRepository.findById(userId);
-		if(!userOptional.isPresent()){
-			throw new UserNotFoundException(userId);
+		if (!userOptional.isPresent()) {
+			throw new UserNotFoundException();
 		}
 		return userOptional.get();
 	}
-	
+
+	@Override
+	public User getUserByUserName(String userName) {
+		Optional<User> userOptional = userRepository.findUserByUserName(userName);
+		if (!userOptional.isPresent()) {
+			throw new UserNotFoundException();
+		}
+		return userOptional.get();
+	}
+
 	@Override
 	public void addUser(User user) {
 		Optional<User> userOptional = userRepository.findUserByUserName(user.getUserName());
@@ -66,5 +75,4 @@ public class UserServiceImpl implements IUserService {
 		}
 	}
 
-	
 }

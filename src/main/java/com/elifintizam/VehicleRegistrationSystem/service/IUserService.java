@@ -9,6 +9,8 @@ public interface IUserService {
 
     User getUserById(Long userId);
 
+    User getUserByUserName(String userName);
+
     void addUser(User user);
 
     void deleteUser(Long userId);
