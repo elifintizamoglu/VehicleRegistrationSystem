@@ -14,4 +14,6 @@ public interface ICarService {
     void updateCar(Long carId, String carName, String brand, String model, Integer year, String numberPlate);
 
     List<Car> getCarsByModelOrBrand(String searchWord);
+
+    List<Car> getCarsByUserId(Long userId);
 }

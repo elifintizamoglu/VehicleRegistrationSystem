@@ -84,4 +84,12 @@ public class CarServiceImpl implements ICarService{
         }
         return cars;
     }
+
+    public List<Car> getCarsByUserId(Long userId) {
+        List<Car> cars = carRepository.findCarsByUserId(userId);
+        if(cars.isEmpty()){
+            throw new IllegalStateException("User or car could not found!");
+        }
+        return cars;
+    }
 }

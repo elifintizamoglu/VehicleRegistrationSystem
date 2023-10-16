@@ -32,6 +32,16 @@ public class CarController {
         return carService.getCars();
     }
 
+    @GetMapping(path = "/getByModelOrBrand/{searchWord}")
+    public List<Car> getCarsByModelOrBrand(@PathVariable("searchWord") String searchWord) {
+        return carService.getCarsByModelOrBrand(searchWord);
+    }
+
+    @GetMapping(path = "/getByUserId/{userId}")
+    public List<Car> getCarsByUserId(@PathVariable("userId") Long userId){
+        return carService.getCarsByUserId(userId);
+    }
+
     @PostMapping(path = "/add")
     public void addCar(@RequestBody Car car) {
         carService.addCar(car);
@@ -52,8 +62,5 @@ public class CarController {
         carService.updateCar(carId, carName, brand, model, year, numberPlate);
     }
 
-    @GetMapping(path = "/getByModelOrBrand/{searchWord}")
-    public List<Car> getCarsByModelOrBrand(@PathVariable("searchWord") String searchWord) {
-        return carService.getCarsByModelOrBrand(searchWord);
-    }
+    
 }
