@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.elifintizam.VehicleRegistrationSystem.exception.CarsNotFoundException;
 import com.elifintizam.VehicleRegistrationSystem.model.Car;
 import com.elifintizam.VehicleRegistrationSystem.repository.CarRepository;
 
@@ -88,7 +89,7 @@ public class CarServiceImpl implements ICarService{
     public List<Car> getCarsByUserId(Long userId) {
         List<Car> cars = carRepository.findCarsByUserId(userId);
         if(cars.isEmpty()){
-            throw new IllegalStateException("User or car could not found!");
+            throw new CarsNotFoundException();
         }
         return cars;
     }
