@@ -42,6 +42,11 @@ public class CarController {
         return carService.getCarsByUserId(userId);
     }
 
+    @GetMapping(path = "/getByUserId/count/{userId}")
+    public Integer getCarsCountByUserId(@PathVariable("userId") Long userId){
+        return carService.getCarsCountByUserId(userId);
+    }
+
     @PostMapping(path = "/add")
     public void addCar(@RequestBody Car car) {
         carService.addCar(car);

@@ -93,4 +93,12 @@ public class CarServiceImpl implements ICarService{
         }
         return cars;
     }
+
+    public Integer getCarsCountByUserId(Long userId) {
+        List<Car> cars = carRepository.findCarsByUserId(userId);
+        if(cars.isEmpty()){
+            return 0;
+        }
+        return cars.size();
+    }
 }

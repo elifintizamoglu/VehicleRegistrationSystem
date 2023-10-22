@@ -69,10 +69,11 @@ public class UserServiceImpl implements IUserService {
 	@Transactional
 	public void updateUserPassword(Long userId, String oldPassword, String newPassword) {
 		User user = userRepository.findById(userId)
-				.orElseThrow(() -> new IllegalStateException("User with id " + userId + " does not exists."));
+				.orElseThrow(() -> new UserNotFoundException());
 		if (oldPassword.equals(user.getPassword()) && !newPassword.equals(oldPassword)) {
 			user.setPassword(newPassword);
 		}
+		
 	}
 
 }
